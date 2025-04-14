@@ -16,7 +16,7 @@ function HistoryPage() {
     return groups;
   };
   
-  const groupedHistory = groupSongsByDay();
+  //const groupedHistory = groupSongsByDay();
   
   if (isLoading) {
     return (

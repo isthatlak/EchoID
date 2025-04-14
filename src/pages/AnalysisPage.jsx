@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+//import { useParams, Link } from 'react-router-dom';
 import { useAudio } from '../context/AudioContext';
 import { getSongAnalysis } from '../services/audioAnalysisService';
 import SongInfo from '../components/SongInfo';
@@ -45,7 +45,7 @@ function AnalysisPage() {
     );
   }
   
-  const { song, analysis } = songData || {};
+  //const { song, analysis } = songData || {};
   
   // Rest of the component remains the same, but using song and analysis from context
   return (
