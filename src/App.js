@@ -10,14 +10,14 @@ function App() {
   useEffect(() => {
     // Client-side error logging
     console.log("App loaded");
-    
+
     // Add unhandled rejection handler
-    const rejectionHandler = event => {
+    const rejectionHandler = (event) => {
       console.error('Unhandled promise rejection:', event.reason);
     };
-    
+
     window.addEventListener('unhandledrejection', rejectionHandler);
-    
+
     return () => {
       window.removeEventListener('unhandledrejection', rejectionHandler);
     };
