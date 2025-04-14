@@ -1,3 +1,4 @@
+// AudioRecorder.jsx
 import { useState, useEffect, useCallback } from 'react';
 import useAudioRecorder from '../hooks/useAudioRecorder';
 import { MicrophoneIcon, StopIcon } from '@heroicons/react/24/solid';
@@ -22,19 +23,17 @@ function AudioRecorder({ onRecordingComplete }) {
 
   const handleAnalyzeAudio = useCallback(async () => {
     setIsAnalyzing(true);
-    
     try {
       const response = await fetch(audioURL);
       const audioBlob = await response.blob();
       const result = await analyzeAudio(audioBlob);
-
       setIsAnalyzing(false);
 
       if (onRecordingComplete) {
         onRecordingComplete({
           audio: audioURL,
           duration: recordingDuration,
-          analysisResult: result
+          analysisResult: result,
         });
       }
     } catch (error) {
@@ -58,17 +57,16 @@ function AudioRecorder({ onRecordingComplete }) {
   return (
     <div className="flex flex-col items-center justify-center py-8">
       {error && <p className="text-red-500 mb-4">{error}</p>}
-      
       <div className="relative">
         <button
           onClick={isRecording ? stopRecording : startRecording}
           disabled={isAnalyzing}
           className={`w-24 h-24 rounded-full flex items-center justify-center focus:outline-none ${
-            isRecording 
-              ? 'bg-red-500 animate-pulse' 
-              : isAnalyzing 
-                ? 'bg-blue-400 cursor-not-allowed' 
-                : 'bg-blue-500 hover:bg-blue-600'
+            isRecording
+              ? 'bg-red-500 animate-pulse'
+              : isAnalyzing
+              ? 'bg-blue-400 cursor-not-allowed'
+              : 'bg-blue-500 hover:bg-blue-600'
           }`}
         >
           {isRecording ? (
@@ -79,14 +77,12 @@ function AudioRecorder({ onRecordingComplete }) {
             <MicrophoneIcon className="h-12 w-12 text-white" />
           )}
         </button>
-        
         {isRecording && (
           <div className="absolute -bottom-8 left-0 right-0 text-center">
             Recording: {formatDuration(recordingDuration)}
           </div>
         )}
       </div>
-      
       <div className="mt-8 text-center">
         {isRecording ? (
           <p className="text-lg">Listening to music...</p>
