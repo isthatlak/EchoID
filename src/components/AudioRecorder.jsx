@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import useAudioRecorder from '../hooks/useAudioRecorder';
 import { MicrophoneIcon, StopIcon } from '@heroicons/react/24/solid';
 import { analyzeAudio } from '../services/audioAnalysisService';
@@ -20,25 +20,16 @@ function AudioRecorder({ onRecordingComplete }) {
     return () => clearInterval(timer);
   }, [isRecording]);
 
-  useEffect(() => {
-    if (audioURL && !isRecording) {
-      handleAnalyzeAudio();
-    }
-  }, [audioURL, isRecording]);
-
-  const handleAnalyzeAudio = async () => {
+  const handleAnalyzeAudio = useCallback(async () => {
     setIsAnalyzing(true);
     
     try {
-      // Convert the audioURL to a blob
       const response = await fetch(audioURL);
       const audioBlob = await response.blob();
-      
-      // Call the analysis service
       const result = await analyzeAudio(audioBlob);
-      
+
       setIsAnalyzing(false);
-      
+
       if (onRecordingComplete) {
         onRecordingComplete({
           audio: audioURL,
@@ -50,7 +41,13 @@ function AudioRecorder({ onRecordingComplete }) {
       console.error('Error analyzing audio:', error);
       setIsAnalyzing(false);
     }
-  };
+  }, [audioURL, recordingDuration, onRecordingComplete]);
+
+  useEffect(() => {
+    if (audioURL && !isRecording) {
+      handleAnalyzeAudio();
+    }
+  }, [audioURL, isRecording, handleAnalyzeAudio]);
 
   const formatDuration = (seconds) => {
     const mins = Math.floor(seconds / 60);
