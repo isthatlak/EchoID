@@ -6,7 +6,7 @@ import Navigation from '../components/Navigation';
 import { useAudio } from '../context/AudioContext';
 
 function HomePage() {
-  const [isIdentifying, setIsIdentifying] = useState(false);
+  //const [isIdentifying, setIsIdentifying] = useState(false);
   const navigate = useNavigate();
   const { addIdentifiedSong } = useAudio();
 
