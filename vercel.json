@@ -13,6 +13,5 @@
       { "src": "/manifest.json", "dest": "/manifest.json" },
       { "src": "/logo(.*).png", "dest": "/logo$1.png" },
       { "src": "/(.*)", "dest": "/index.html" }
-      { "src": "/(.*)", "dest": "/index.html" }
     ]
-  }
+  }  
