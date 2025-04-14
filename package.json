@@ -2,7 +2,7 @@
   "name": "echoid",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://isthatlak.github.io/echoid",
+  "homepage": "https://isthatlak.github.io/EchoID",
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "@testing-library/dom": "^10.4.0",
@@ -22,9 +22,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "tailwind:init": "tailwindcss init -p",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "tailwind:init": "tailwindcss init -p"
   },
   "eslintConfig": {
     "extends": [
